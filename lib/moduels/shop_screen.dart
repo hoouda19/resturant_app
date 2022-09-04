@@ -10,13 +10,13 @@ class _ShopScreenState extends State<ShopScreen> {
   bool is_vis = true;
   @override
   Widget build(BuildContext context) {
-    Size size=MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
         children: [
           buildContainerHead(size),
           SizedBox(height: size.height * .01),
-          buildTextfiled('user name', Icons.person_outline, 0),
+          buildTextfiled('mahmoud mohammed', Icons.person_outline, 0), //here
           buildTextfiled('Birthday', Icons.event, 0),
           buildTextfiled('01021869233', Icons.phone_android, 0),
           buildTextfiled('Email', Icons.email_outlined, 0),
@@ -49,6 +49,7 @@ class _ShopScreenState extends State<ShopScreen> {
       ),
     );
   }
+
   Padding buildTextfiled(text, icon, num) {
     Color c = Colors.green;
     return Padding(
@@ -59,17 +60,17 @@ class _ShopScreenState extends State<ShopScreen> {
         decoration: InputDecoration(
           suffixIcon: num == 1
               ? IconButton(
-            onPressed: () {
-              setState(() {
-                is_vis = !is_vis;
-              });
-            },
-            icon: Icon(
-              is_vis ? Icons.visibility : Icons.visibility_off,
-              size: 30,
-              color: is_vis?KprimaryColor:c,
-            ),
-          )
+                  onPressed: () {
+                    setState(() {
+                      is_vis = !is_vis;
+                    });
+                  },
+                  icon: Icon(
+                    is_vis ? Icons.visibility : Icons.visibility_off,
+                    size: 30,
+                    color: is_vis ? KprimaryColor : c,
+                  ),
+                )
               : null,
           contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           prefixIcon: Padding(
@@ -85,9 +86,10 @@ class _ShopScreenState extends State<ShopScreen> {
       ),
     );
   }
+
   Container buildContainerHead(Size size) {
     return Container(
-      height: size.height *.38,
+      height: size.height * .38,
       child: Stack(
         children: [
           Container(
@@ -127,7 +129,7 @@ class _ShopScreenState extends State<ShopScreen> {
           ),
           Align(
             child: Text(
-              "User Name",
+              "mahmoud",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 30,

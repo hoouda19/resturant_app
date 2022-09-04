@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '/constant/pallete.dart';
 import '/layout/home_layout.dart';
-import '/model/user.dart';
 import '/widgets/background-image.dart';
 import '/widgets/password-input.dart';
 import '/widgets/rounded-button.dart';
@@ -13,7 +14,10 @@ import 'create-new-account.dart';
 class LoginScreen extends StatelessWidget {
   var eControl = TextEditingController();
   var pControl = TextEditingController();
-  bool correct = false;
+  final snack = SnackBar(
+    content: Text('invalid password or email try again :) '),
+    backgroundColor: Colors.red,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -60,22 +64,15 @@ class LoginScreen extends StatelessWidget {
                     ),
                     RoundedButton(
                       function: () {
-                        final snack = SnackBar(
-                          content:
-                              Text('invalid password or email try again :)'),
-                          backgroundColor: Colors.red,
-                        );
-                        for (int i = 0; i < loginUsers.length; i++) {
-                          if (loginUsers[i].email == eControl.value.text &&
-                              loginUsers[i].password == pControl.value.text) {
-                            correct = true;
-                            break;
-                          }
-                        }
-                        correct
-                            ? Navigator.pushReplacement(context,
-                                MaterialPageRoute(builder: (_) => HomeLayout()))
-                            : ScaffoldMessenger.of(context).showSnackBar(snack);
+                        FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
+                                email: eControl.text, password: pControl.text)
+                            .then((value) {
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (_) => HomeLayout()));
+                        }).catchError((e) {
+                          ScaffoldMessenger.of(context).showSnackBar(snack);
+                        });
                       },
                       buttonName: 'Login',
                     ),

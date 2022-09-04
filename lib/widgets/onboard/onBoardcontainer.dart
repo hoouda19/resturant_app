@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../../moduels/screens.dart';
+import '../../moduels/welcome_screen.dart';
 
 class onBoardContainer extends StatelessWidget {
   final String title;
   final String subTitle;
   final String image;
   final String floatimg;
-  const onBoardContainer(this.title, this.subTitle, this.image, this.floatimg,
+  final bool sec;
+  const onBoardContainer(
+      this.title, this.subTitle, this.image, this.floatimg, this.sec,
       {Key? key})
       : super(key: key);
 
@@ -30,7 +33,6 @@ class onBoardContainer extends StatelessWidget {
                 //fit: BoxFit.cover,
               ),
             ),
-
             Container(
               margin: EdgeInsets.all(20),
               decoration: const BoxDecoration(
@@ -73,34 +75,14 @@ class onBoardContainer extends StatelessWidget {
                       floatimg,
                       style: TextStyle(color: Colors.red, fontSize: 20),
                     ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: sec ? Icon(Icons.arrow_forward) : Text(''),
                   )
                 ],
               ),
             ),
-            // Padding(
-            //     padding: const EdgeInsets.symmetric(
-            //       horizontal: 15.0,
-            //     ),
-            //     child: Column(
-            //       mainAxisAlignment: MainAxisAlignment.end,
-            //       children: [
-            //         Row(
-            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //           children: [
-            //             TextButton(
-            //                 onPressed: () {},
-            //                 child: const Text(
-            //                   'Back',
-            //                   style: TextStyle(color: Colors.white),
-            //                 )),
-            //             TextButton(
-            //                 onPressed: () {},
-            //                 child: const Text('Next',
-            //                     style: TextStyle(color: Colors.white))),
-            //           ],
-            //         ),
-            //       ],
-            //     )),
           ],
         ),
       ),

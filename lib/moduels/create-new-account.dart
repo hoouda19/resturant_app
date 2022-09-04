@@ -1,5 +1,8 @@
 import 'dart:ui' show FontWeight, ImageFilter, Size;
+
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '/constant/pallete.dart';
 import '/layout/home_layout.dart';
 import '/moduels/login-screen.dart';
@@ -8,11 +11,11 @@ import '/widgets/password-input.dart';
 import '/widgets/rounded-button.dart';
 import '/widgets/text-field-input.dart';
 
-
-
 //import '../pallete.dart';
 
 class CreateNewAccount extends StatelessWidget {
+  var eControl = TextEditingController();
+  var pControl = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -57,7 +60,7 @@ class CreateNewAccount extends StatelessWidget {
                           border: Border.all(color: kWhite, width: 2),
                         ),
                         child: Icon(
-                         Icons.arrow_upward_sharp,
+                          Icons.arrow_upward_sharp,
                           color: kWhite,
                         ),
                       ),
@@ -71,40 +74,44 @@ class CreateNewAccount extends StatelessWidget {
                   children: [
                     TextInputField(
                       editingController: null,
-                      icon:Icons.person_outline,
+                      icon: Icons.person_outline,
                       hint: 'User',
                       inputType: TextInputType.name,
                       inputAction: TextInputAction.next,
                     ),
                     TextInputField(
-                      editingController: null,
-                      icon:Icons.email,
+                      editingController: eControl,
+                      icon: Icons.email,
                       hint: 'Email',
                       inputType: TextInputType.emailAddress,
                       inputAction: TextInputAction.next,
                     ),
                     PasswordInput(
-                      editingController: null,
+                      editingController: pControl,
                       icon: Icons.lock,
                       hint: 'Password',
                       inputAction: TextInputAction.next,
                       inputType: TextInputType.name,
                     ),
-                    PasswordInput(
-                      editingController: null,
-                      icon: Icons.lock,
-                      hint: 'Confirm Password',
-                      inputAction: TextInputAction.done,
-                      inputType: TextInputType.name,
-                    ),
+                    // PasswordInput(
+                    //   editingController: pControl,
+                    //   icon: Icons.lock,
+                    //   hint: 'Confirm Password',
+                    //   inputAction: TextInputAction.done,
+                    //   inputType: TextInputType.name,
+                    // ),
                     SizedBox(
                       height: 25,
                     ),
-                    RoundedButton(buttonName: 'Register',
-                    function: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (_) => HomeLayout()));
-                    },),
+                    RoundedButton(
+                      buttonName: 'Register',
+                      function: () {
+                        FirebaseAuth.instance.createUserWithEmailAndPassword(
+                            email: eControl.text, password: pControl.text);
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (_) => HomeLayout()));
+                      },
+                    ),
                     SizedBox(
                       height: 30,
                     ),
@@ -117,12 +124,16 @@ class CreateNewAccount extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>LoginScreen()));
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => LoginScreen()));
                           },
                           child: Text(
                             'Login',
                             style: kBodyText.copyWith(
-                                color: Color(0xff86C100), fontWeight: FontWeight.bold),
+                                color: Color(0xff86C100),
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
