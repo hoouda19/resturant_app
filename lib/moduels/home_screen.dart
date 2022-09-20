@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:resturant_app/controllers/home_controller.dart';
 import '/constant/constant.dart';
 import '/model/addTocart.dart';
 import '/model/product.dart';
@@ -12,17 +11,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  HomeController homeController = HomeController();
-  @override
-  void initState() {
-    homeController.getData().then((_) {
-      print('hii');
-      homeController.setTriggerLoading();
-      setState(() {});
-    });
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -36,38 +24,32 @@ class _HomeScreenState extends State<HomeScreen> {
           buildHeaderRow(),
           SearchWidget(size, context),
           SizedBox(height: size.height * 0.02),
-          if (homeController.loading) ...[
-            Center(
-              child: CircularProgressIndicator(),
-            )
-          ] else ...[
-            Itemproduct('Drink'),
-            SizedBox(height: size.height * 0.005),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: size.width * .01),
-              height: size.height * 0.25,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: homeController.drinks.length,
-                itemBuilder: (_, index) {
-                  return buildDrinkItem(size, homeController.drinks[index]);
-                },
-              ),
+          Itemproduct('Drink'),
+          SizedBox(height: size.height * 0.005),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: size.width * .01),
+            height: size.height * 0.25,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: myDrink.length,
+              itemBuilder: (_, index) {
+                return buildDrinkItem(size, myDrink[index]);
+              },
             ),
-            SizedBox(height: size.height * 0.005),
-            Itemproduct('Food'),
-            SizedBox(height: size.height * 0.005),
-            Container(
-              height: size.height * .5,
-              // color: Colors.red,
-              child: ListView.builder(
-                itemCount: homeController.food.length,
-                itemBuilder: (_, index) {
-                  return buildFoodItem(size, homeController.food[index]);
-                },
-              ),
+          ),
+          SizedBox(height: size.height * 0.005),
+          Itemproduct('Food'),
+          SizedBox(height: size.height * 0.005),
+          Container(
+            height: size.height * .5,
+            // color: Colors.red,
+            child: ListView.builder(
+              itemCount: myFood.length,
+              itemBuilder: (_, index) {
+                return buildFoodItem(size, myFood[index]);
+              },
             ),
-          ]
+          ),
         ],
       ),
     );
@@ -130,9 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: size.height * .003,
                 ),
                 Text(
-                  product.describtion,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                  'Food Product',
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.blueGrey,

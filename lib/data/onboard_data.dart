@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import '../model/onboard_page_model.dart';
 
 List<Onboardmodel> onBoradList = [
@@ -8,3 +9,5 @@ List<Onboardmodel> onBoradList = [
   Onboardmodel('Resturant App', 'The Best Price',
       'assets/images/onBoard/onboard.png', 'START', false)
 ];
+
+final contrpage = PageController();

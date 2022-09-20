@@ -22,8 +22,8 @@ class RoundedButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         color: Color(0xff86C100),
       ),
-      child: FlatButton(
-        onPressed:()=> function(),
+      child: TextButton(
+        onPressed: () => function(),
         child: Text(
           buttonName,
           style: kBodyText.copyWith(fontWeight: FontWeight.bold),

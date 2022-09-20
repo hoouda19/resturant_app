@@ -19,17 +19,6 @@ class Product {
       required this.mediumPrice,
       required this.bigPrice,
       required this.ID});
-
-  factory Product.fromJson(Map json) => Product(
-        Name: json['title'],
-        describtion: json['description'],
-        imageUrl: json['image'],
-        smallPrice:double.parse( json['price'].toString()),
-        mediumPrice: double.parse( json['price'].toString()),
-        bigPrice: double.parse( json['price'].toString()),
-        ID: 1,
-        subTitle: '',
-      );
 }
 
 List<Product> myDrink = [
@@ -249,7 +238,7 @@ List<Product> myFood = [
       describtion:
           'shrimps,Grilled Calamari crabs,pizza sause and syami Mozzarella cheese ',
       imageUrl:
-          'https://www.weightwatchers.com.au/images/3081/dynamic/foodandrecipes/2016/02/SeafoodPizza_XXL.jpg',
+          'https://i.pinimg.com/originals/4a/a8/21/4aa821e44d64cf75de38d9c20d78ee50.jpg',
       smallPrice: 70,
       mediumPrice: 90,
       bigPrice: 110,
