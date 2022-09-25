@@ -90,22 +90,22 @@ class Names extends StatelessWidget {
                         )),
                     ListTile(
                         leading: Text(
-                          "Group :",
+                          "Group : ",
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold),
                         ),
                         title: Text(
-                          "..",
+                          "5",
                           style: TextStyle(color: Colors.white),
                         )),
                     ListTile(
                         leading: Text(
-                          "University :",
+                          "University : ",
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold),
                         ),
                         title: Text(
-                          "..",
+                          "Mansoura",
                           style: TextStyle(color: Colors.white),
                         )),
                     ListTile(
@@ -115,7 +115,7 @@ class Names extends StatelessWidget {
                               fontSize: 15, fontWeight: FontWeight.bold),
                         ),
                         title: Text(
-                          "..",
+                          "Computer science and Information",
                           style: TextStyle(color: Colors.white),
                         )),
                   ],

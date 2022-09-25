@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../widgets/Information.dart';
 import '../widgets/Names.dart';
 import '/constant/constant.dart';
+import 'login-screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -98,7 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ])),
             child: TextButton(
               onPressed: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => ,))
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
               },
               child: Text(
                 'Log Out',
@@ -194,7 +195,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           Align(
             child: Text(
-              "User Name",
+              "Mahmoud",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 30,

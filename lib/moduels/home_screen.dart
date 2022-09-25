@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:resturant_app/controllers/home_controller.dart';
 import '/constant/constant.dart';
 import '/model/addTocart.dart';
 import '/model/product.dart';
@@ -11,6 +12,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  HomeController homeController = HomeController();
+
+  @override
+  void initState() {
+    homeController.getFood().then((value) {
+      homeController.getDrinks().then((value) {
+        setState(() {});
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -31,9 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
             height: size.height * 0.25,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: myDrink.length,
+              itemCount: homeController.drinks.length,
               itemBuilder: (_, index) {
-                return buildDrinkItem(size, myDrink[index]);
+                return buildDrinkItem(size, homeController.drinks[index]);
               },
             ),
           ),
@@ -44,9 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
             height: size.height * .5,
             // color: Colors.red,
             child: ListView.builder(
-              itemCount: myFood.length,
+              itemCount: homeController.food.length,
               itemBuilder: (_, index) {
-                return buildFoodItem(size, myFood[index]);
+                return buildFoodItem(size, homeController.food[index]);
               },
             ),
           ),
@@ -68,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: Container(
         margin:
-            EdgeInsets.symmetric(horizontal: size.width * 0.05, vertical: 7),
+            EdgeInsets.symmetric(horizontal: size.width * 0.05, vertical: 10),
         width: size.width,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,9 +95,9 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: Hero(
-                  tag: '${product.ID}',
+                  tag: '${product.id}',
                   child: Image.network(
-                    product.imageUrl,
+                    product.imageUrl!,
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -100,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Container(
                   width: size.width * .4,
                   child: Text(
-                    product.Name,
+                    product.name!,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: Colors.black,
@@ -157,9 +170,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: size.height * 0.25,
                   width: size.width * 0.35,
                   child: Hero(
-                    tag: '${product.ID}',
+                    tag: '${product.id}',
                     child: Image.network(
-                      product.imageUrl,
+                      product.imageUrl!,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -180,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: size.width * 0.35,
                 height: size.height * 0.07,
                 child: Text(
-                  product.Name,
+                  product.name!,
                   style: TextStyle(
                       fontSize: 19,
                       fontWeight: FontWeight.bold,

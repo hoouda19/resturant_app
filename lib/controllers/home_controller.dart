@@ -4,12 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:resturant_app/model/product.dart';
 
 class HomeController {
-
   bool loading = true;
   List<Product> drinks = <Product>[];
   List<Product> food = <Product>[];
 
-  void setTriggerLoading(){
+  void setTriggerLoading() {
     loading = !loading;
     print(loading);
   }
@@ -40,7 +39,7 @@ class HomeController {
   Future<bool> getFood() async {
     try {
       QuerySnapshot<Map<String, dynamic>> data =
-          await _fireStore.collection('Products').get();
+          await _fireStore.collection('Foods').get();
       print(data.docs);
 
       for (var item in data.docs) {

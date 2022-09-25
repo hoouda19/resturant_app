@@ -9,7 +9,7 @@ class DetailsProduct extends StatefulWidget {
   final Product product;
   final String typeOfText;
 
-  const DetailsProduct({required this.product,required this.typeOfText});
+  const DetailsProduct({required this.product, required this.typeOfText});
 
   @override
   _DetailsProductState createState() => _DetailsProductState();
@@ -19,7 +19,7 @@ class _DetailsProductState extends State<DetailsProduct> {
   int _numPices = 1;
   int groupValue = -1;
   var ScaffoldKey = GlobalKey<ScaffoldState>();
-  bool Success=false;
+  bool Success = false;
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class _DetailsProductState extends State<DetailsProduct> {
                       ),
                       SizedBox(height: size.height * .02),
                       Text(
-                        widget.product.describtion,
+                        widget.product.describtion!,
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w400,
@@ -97,17 +97,17 @@ class _DetailsProductState extends State<DetailsProduct> {
                       ),
                       buildContainerNumPices(size),
                       //SizedBox(height: size.height,)
-                      buildRadioListTile('Small', widget.product.smallPrice, 1),
                       buildRadioListTile(
-                          'Medium', widget.product.mediumPrice, 2),
-                      buildRadioListTile('Big', widget.product.bigPrice, 3),
+                          'Small', widget.product.smallPrice!, 1),
+                      buildRadioListTile(
+                          'Medium', widget.product.mediumPrice!, 2),
+                      buildRadioListTile('Big', widget.product.bigPrice!, 3),
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ElevatedButton.icon(
                             onPressed: () {
-
                               final SB = SnackBar(
                                 content: Text(
                                   groupValue != -1
@@ -125,26 +125,26 @@ class _DetailsProductState extends State<DetailsProduct> {
                               ScaffoldMessenger.of(context).showSnackBar(SB);
                               double totalPrice;
                               String size;
-                              if(Success==false && groupValue!=-1) {
+                              if (Success == false && groupValue != -1) {
                                 if (groupValue == 1) {
                                   totalPrice =
-                                      _numPices * widget.product.smallPrice;
-                                  size='Small';
+                                      _numPices * widget.product.smallPrice!;
+                                  size = 'Small';
                                 } else if (groupValue == 2) {
                                   totalPrice =
-                                      _numPices * widget.product.mediumPrice;
-                                  size='Medium';
+                                      _numPices * widget.product.mediumPrice!;
+                                  size = 'Medium';
                                 } else {
                                   totalPrice =
-                                      _numPices * widget.product.bigPrice;
-                                  size='Big';
+                                      _numPices * widget.product.bigPrice!;
+                                  size = 'Big';
                                 }
                                 if (groupValue != -1) {
                                   AddToCart ChooseProduct = AddToCart(
-                                    imageUrl: widget.product.imageUrl,
+                                    imageUrl: widget.product.imageUrl!,
                                     numberOfpices: _numPices,
                                     Price: totalPrice,
-                                    name: widget.product.Name,
+                                    name: widget.product.name!,
                                     size: size,
                                   );
                                   myCart.add(ChooseProduct);
@@ -152,8 +152,8 @@ class _DetailsProductState extends State<DetailsProduct> {
                                 }
                                 Navigator.pop(context);
                               }
-                              if(groupValue!=-1){
-                                Success=true;
+                              if (groupValue != -1) {
+                                Success = true;
                               }
                             },
                             icon: Icon(Icons.add_shopping_cart_outlined),
@@ -346,7 +346,7 @@ class _DetailsProductState extends State<DetailsProduct> {
             height: size.height * .07,
           ),
           Text(
-            widget.product.Name,
+            widget.product.name!,
             style: TextStyle(
                 fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
           ),
@@ -387,9 +387,9 @@ class _DetailsProductState extends State<DetailsProduct> {
         child: Opacity(
           opacity: .6,
           child: Hero(
-            tag: '${widget.product.ID}',
+            tag: '${widget.product.id}',
             child: Image.network(
-              widget.product.imageUrl,
+              widget.product.imageUrl!,
               fit: BoxFit.fill,
             ),
           ),
